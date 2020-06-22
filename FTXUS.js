@@ -28,11 +28,11 @@ class FTXUS {
     this._subaccount = null;
   };
 
-  signRequest() {
+  signRequest(method, endpoint) {
     const headers = this._client.defaults.headers.common;
     const timestamp = headers[FTXUS_TS];
-    const url = new URL(this._client.defaults.baseURL);
-    const signaturePayload = `${timestamp}${this._client.method}${url.pathname}`;
+    const url = new URL(this._client.defaults.baseURL + endpoint);
+    const signaturePayload = `${timestamp}${method}${url.pathname}`;
     const signature = crypto.createHmac('sha256', this._secret)
       .update(signaturePayload)
       .digest('hex');
@@ -45,8 +45,8 @@ class FTXUS {
       this.client.defaults.headers.common[FTXUS_SUBACCOUNT] = this._subaccount;
     }
     this._client.defaults.headers.common[FTXUS_KEY] = this._key;
-    this._client.defaults.headers.common[FTXUS_TS] = Date.now();
-    this.signRequest();
+    this._client.defaults.headers.common[FTXUS_TS] = +new Date().toString();
+    this.signRequest(method, endpoint);
   }
 }
 
