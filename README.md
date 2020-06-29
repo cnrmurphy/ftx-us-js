@@ -20,9 +20,15 @@ npm i ftx-us
 ```JavaScript
 const { FTXUS } = require('ftx-us');
 
+// Retrieve secrets if authenticating
+const apiKey = process.env.FTX_API_KEY;
+const apiSecret = process.env.FTX_API_SECRET;
+
+const ftxUS = new FTXUS({ key: apiKey, secret: apiSecret });
+
 (async () => {
   // Get all markets
-  const markets = await FTXUS.Markets.list();
+  const markets = await ftxUS.Markets.list();
   console.log(markets);
 })();
 ```
