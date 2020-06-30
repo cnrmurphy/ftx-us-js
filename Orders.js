@@ -75,6 +75,30 @@ class OrdersService {
 
     return r.data.result;
   }
+
+  async getTriggerOrderHistory(opts={
+    market: null,
+    startTime: null,
+    endTime: null,
+    side: null,
+    type: null,
+    orderType: null,
+    limit: null
+  }) {
+    const c = this._client;
+    const u = new URL(c.baseURL.href);
+    u.pathname = '/conditional_orders/history';
+
+    Object.keys(opts).forEach(key => {
+      if (opts[key]) {
+        u.searchParams.append(key, opts[key]);
+      }
+    });
+    console.log(u)
+    const r = await c.get(u);
+
+    return r.data.result;
+  }
 }
 
 module.exports = OrdersService;
