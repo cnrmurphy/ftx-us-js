@@ -65,6 +65,16 @@ class OrdersService {
 
    return r.data.result;
   }
+
+  async getTriggerOrderTriggers(orderId) {
+    const c = this._client;
+    const u = new URL(c.baseURL.href);
+    u.pathname = `/conditional_orders/${orderId}/triggers`;
+
+    const r = await c.get(u);
+
+    return r.data.result;
+  }
 }
 
 module.exports = OrdersService;
