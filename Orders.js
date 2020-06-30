@@ -33,15 +33,15 @@ class OrdersService {
     u.searchParams.append('limit', limit);
 
     if (market) {
-      u.searchParams.append(`market=${market}`);
+      u.searchParams.append('market', market);
     }
 
     if (startTime) {
-      u.searchParams.append(`start_time=${startTime}`);
+      u.searchParams.append('start_time', startTime);
     }
 
     if (endTime) {
-      u.searchParams.append(`end_time=${endtime}`);
+      u.searchParams.append('end_time', endtime);
     }
 
     const r = await c.get(u);
@@ -54,11 +54,11 @@ class OrdersService {
     u.pathname = '/conditional_orders';
 
     if (market) {
-      u.searchParams.append(`market=${market}`);
+      u.searchParams.append('market', market);
     }
 
     if (type) {
-      u.searchParams.append(`type=${type}`);
+      u.searchParams.append('type', type);
     }
   
    const r = await c.get(u);
