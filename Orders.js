@@ -101,6 +101,61 @@ class OrdersService {
 
     return r.data.result;
   }
+
+  async placeOrder(market, side, price, type, size, opts= {
+    reduceOnly: false,
+    ioc: false,
+    postOnly: false,
+    clientId: null
+  }) {
+    const c = this._client;
+    const u = new URL(c.baseURL.href);
+    u.pathname = '/orders';
+
+    const payload = { market, side, price, type, size, ...opts };
+    const r = await c.post(u, payload);
+
+    return r.data.result;
+  }
+
+  async placeTriggerOrder(market, side, size, type, opts={
+    reduceOnly: false,
+    retryUntilFilled: false,
+    stopLoss: {
+      triggerPrice: 0,
+      orderPrice: 0
+    },
+    trailingStop: {
+      trailValue: 0
+    },
+    takeProfit: {
+      triggerPrice: 0,
+      orderPrice: 0
+    }
+  }) {
+    const c = this._client;
+    const u = new URL(c.baseURL.href);
+    u.pathname = '/conditional_orders';
+
+    const { reduceOnly, retryUntilFilled, stopLoss, trailingStop, takeProfit } = opts;
+    const payload = { market, side, size, type, reduceOnly, retryUntilFilled };
+
+    if (stopLoss.triggerPrice !== 0) {
+      payload['stopLoss'] = stopLoss;
+    }
+
+    if (trailingStop.trailValue !== 0) {
+      payload['trailingStop'] = trailingStop;
+    }
+
+    if (takeProfit.triggerPrice !== 0) {
+      payload['takeProfit'] = takeProfit;
+    }
+    
+    const r = await c.post(u, payload);
+
+    return r.data.result;
+  }
 }
 
 module.exports = OrdersService;
