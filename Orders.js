@@ -89,12 +89,14 @@ class OrdersService {
     const u = new URL(c.baseURL.href);
     u.pathname = '/conditional_orders/history';
 
+    // Loop through the provided optional parameters
+    // and add the key/value pairs to the URL as search params
     Object.keys(opts).forEach(key => {
       if (opts[key]) {
         u.searchParams.append(key, opts[key]);
       }
     });
-    console.log(u)
+    
     const r = await c.get(u);
 
     return r.data.result;
