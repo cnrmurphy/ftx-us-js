@@ -151,10 +151,34 @@ class OrdersService {
     if (takeProfit.triggerPrice !== 0) {
       payload['takeProfit'] = takeProfit;
     }
-    
+
     const r = await c.post(u, payload);
 
     return r.data.result;
+  }
+
+  async modifyOrder(orderId, opts={ price: null, size: null, clientId: null }) {
+    const c = this._client;
+    const u = new URL(this.c.baseURL.href);
+    u.pathname = `orders/${orderId}/modify`;
+
+    if (!opts.price && !opts.size) {
+      return new Error(`Tried to modify Order ${orderId} without providing a price or size`);
+    }
+    
+    const payload = {};
+
+    if (opts.price) {
+      payload.price = opts.price;
+    }
+    if (opts.size) {
+      payload.size = opts.size;
+    }
+    if (opts.cliendId) {
+      payload.clientId = opts.clientId;
+    }
+
+    return c.post(u, payload);
   }
 }
 
