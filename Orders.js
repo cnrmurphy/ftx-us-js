@@ -192,7 +192,9 @@ class OrdersService {
       payload.clientId = opts.clientId;
     }
 
-    return c.post(u, payload);
+    const r = c.post(u, payload);
+
+    return r.data.result;
   }
 
   async cancelById(id) {
@@ -201,7 +203,7 @@ class OrdersService {
     u.pathname = `/orders/${id}`;
 
     const r = await c.delete(u);
-    
+
     return r.data.result;
   }
 }
