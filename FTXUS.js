@@ -56,15 +56,15 @@ class FTXUS {
     this._client = client;
   }
 
-  requestSignature(ts, method, url) {
-    const signaturePayload = `${ts}${method}/api${url.pathname}${url.search}`;
+  requestSignature(ts, method, url, payload='') {
+    const signaturePayload = `${ts}${method}/api${url.pathname}${url.search}${payload}`;
     const signature = crypto.createHmac('sha256', this._secret)
       .update(signaturePayload)
       .digest('hex');
     return signature;
   }
 
-  createRequest(method, url) {
+  createRequest(method, url, payload='') {
     if (this._subaccount) {
       this.client.defaults.headers.common[FTXUS_SUBACCOUNT] = this._subaccount;
     }
@@ -72,7 +72,7 @@ class FTXUS {
       const ts = +Date.toString();
       this._client.defaults.headers.common[FTXUS_KEY] = this._key;
       this._client.defaults.headers.common[FTXUS_TS] = ts;
-      this._client.defaults.headers.common[FTXUS_SIGN] = this.requestSignature(ts, method, url);
+      this._client.defaults.headers.common[FTXUS_SIGN] = this.requestSignature(ts, method, url, payload);
     }
   }
 
@@ -90,12 +90,14 @@ class FTXUS {
   }
 
   post(url, payload) {
-    this.createRequest('POST', url);
+    const p = payload ? JSON.stringify(payload) : '';
+    this.createRequest('POST', url, p);
     return this._client.post(url.pathname, payload);
   }
 
   delete(url, payload) {
-    this.createRequest('DELETE', url);
+    const p = payload ? JSON.stringify(payload) : '';
+    this.createRequest('DELETE', url, p);
     return this._client.delete(url.pathname, payload);
   }
 }
