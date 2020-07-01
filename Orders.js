@@ -216,6 +216,16 @@ class OrdersService {
 
     return r.data.result;
   }
+
+  async cancelOpenTriggerOrders(id) {
+    const c = this._client;
+    const u = new URL(this.c.baseURL.href);
+    u.pathname = `/conditional_orders/${id}`;
+
+    const r = await c.delete(u);
+
+    return r.data.result;
+  }
 }
 
 module.exports = OrdersService;
