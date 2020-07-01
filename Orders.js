@@ -206,6 +206,16 @@ class OrdersService {
 
     return r.data.result;
   }
+
+  async cancelByClientId(id) {
+    const c = this._client;
+    const u = new URL(this.c.baseURL.href);
+    u.pathname = `/orders/by_client_id/${id}`;
+
+    const r = await c.delete(u);
+
+    return r.data.result;
+  }
 }
 
 module.exports = OrdersService;
