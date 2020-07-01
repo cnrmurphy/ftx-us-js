@@ -93,6 +93,11 @@ class FTXUS {
     this.createRequest('POST', url);
     return this._client.post(url.pathname, payload);
   }
+
+  delete(url, payload) {
+    this.createRequest('DELETE', url);
+    return this._client.delete(url.pathname, payload);
+  }
 }
 
 module.exports = FTXUS;
