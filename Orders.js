@@ -157,13 +157,27 @@ class OrdersService {
     return r.data.result;
   }
 
-  async modifyOrder(orderId, opts={ price: null, size: null, clientId: null }) {
+  async modifyOrder(opts={ orderId: null, price: null, size: null, clientId: null }) {
+    // Ensure that the minimal required parameters are provided to the method
+    if (opts.orderId && opts.clientId) {
+      return new Error(`Both an Order ID and Client ID was passed. Provide only one of he two parameters depending on how you wish to modify your order.`);
+    }
+    if (!opts.orderId && !opts.clientId) {
+      return new Error(`You must provide either an Order ID or Client ID to modify your order.`);
+    }
+    if (!opts.price && !opts.size) {
+      return new Error(`Tried to modify Order ${opts.orderId} without providing a price or size`);
+    }
+    
     const c = this._client;
     const u = new URL(this.c.baseURL.href);
-    u.pathname = `orders/${orderId}/modify`;
 
-    if (!opts.price && !opts.size) {
-      return new Error(`Tried to modify Order ${orderId} without providing a price or size`);
+    if (opts.orderId) {
+      u.pathname = `/orders/${opts.orderId}/modify`;
+    }
+
+    if (opts.clientId) {
+      u.pathname = `/orders/by_client_id/${opts.clientId}/modify`;
     }
     
     const payload = {};
