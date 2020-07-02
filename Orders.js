@@ -11,6 +11,11 @@ const orderTypes = {
 class OrdersService {
   constructor(client) {
     this._client = client;
+    this._orderType = orderTypes;
+  }
+
+  get orderTypes() {
+    return this._orderType;
   }
 
   async getOpenOrders(market) {
