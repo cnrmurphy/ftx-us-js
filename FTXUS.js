@@ -5,6 +5,7 @@ const { URL } = require('url');
 const WalletService = require('./Wallet');
 const MarketsService = require('./Markets');
 const OrdersService = require('./Orders');
+const FillsService = require('./Fills');
 
 const FTXUS_KEY = 'FTXUS-KEY';
 const FTXUS_TS = 'FTXUS-TS';
@@ -34,6 +35,7 @@ class FTXUS {
     this._wallet = new WalletService(this);
     this._markets = new MarketsService(this);
     this._orders = new OrdersService(this);
+    this._fills = new FillsService(this);
   };
 
   get Wallet(){
@@ -46,6 +48,10 @@ class FTXUS {
 
   get Orders() {
     return this._orders;
+  }
+
+  get Fills() {
+    return this._fills;
   }
 
   get baseURL() {
