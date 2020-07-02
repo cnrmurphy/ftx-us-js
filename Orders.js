@@ -2,6 +2,9 @@ const { URL } = require('url');
 
 const basePath = '/orders';
 
+// These can be useful when constructing certain payloads.
+// The user can simply access these values from OrdersService.
+// const { orderTypes } = FTXUS.Client;
 const orderTypes = {
   STOP: 'stop',
   TRAILING_STOP: 'trailing_stop',
