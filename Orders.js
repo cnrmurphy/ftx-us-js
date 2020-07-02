@@ -197,6 +197,16 @@ class OrdersService {
     return r.data.result;
   }
 
+  async getOrderStatus(id) {
+    const c = this._client;
+    const u = new URL(this.c.baseURL.href);
+    u.pathname = `/orders/${id}`;
+
+    const r = await c.get(u);
+
+    return r.data.result;
+  }
+
   async cancelById(id) {
     const c = this._client;
     const u = new URL(this.c.baseURL.href);
