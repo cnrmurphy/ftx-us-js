@@ -14,7 +14,7 @@ class OrdersService {
   }
 
   async getOpenOrders(market) {
-    const c = new URL(c.baseURL.href);
+    const c = c.newBaseURL();
     u.pathname = basePath;
 
     if (market) {
@@ -28,7 +28,7 @@ class OrdersService {
   async getHistory(market=null, opts={ startTime: null, endTime: null, limit: 100 }) {
     const { startTime, endTime, limit } = opts;
     const c = this._client;
-    const u = new URL(c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = basePath + '/history';
     u.searchParams.append('limit', limit);
 
@@ -50,7 +50,7 @@ class OrdersService {
 
   async getOpenTriggerOrders(opts={ market: null, type: null }) {
     const c = this._client;
-    const u = new URL(c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = '/conditional_orders';
 
     if (market) {
@@ -68,7 +68,7 @@ class OrdersService {
 
   async getTriggerOrderTriggers(orderId) {
     const c = this._client;
-    const u = new URL(c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = `/conditional_orders/${orderId}/triggers`;
 
     const r = await c.get(u);
@@ -86,7 +86,7 @@ class OrdersService {
     limit: null
   }) {
     const c = this._client;
-    const u = new URL(c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = '/conditional_orders/history';
 
     // Loop through the provided optional parameters
@@ -109,7 +109,7 @@ class OrdersService {
     clientId: null
   }) {
     const c = this._client;
-    const u = new URL(c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = '/orders';
 
     const payload = { market, side, price, type, size, ...opts };
@@ -134,7 +134,7 @@ class OrdersService {
     }
   }) {
     const c = this._client;
-    const u = new URL(c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = '/conditional_orders';
 
     const { reduceOnly, retryUntilFilled, stopLoss, trailingStop, takeProfit } = opts;
@@ -170,7 +170,7 @@ class OrdersService {
     }
     
     const c = this._client;
-    const u = new URL(this.c.baseURL.href);
+    const u = c.newBaseURL();
 
     if (opts.orderId) {
       u.pathname = `/orders/${opts.orderId}/modify`;
@@ -199,7 +199,7 @@ class OrdersService {
 
   async getOrderStatus(id) {
     const c = this._client;
-    const u = new URL(this.c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = `/orders/${id}`;
 
     const r = await c.get(u);
@@ -209,7 +209,7 @@ class OrdersService {
 
   async cancelById(id) {
     const c = this._client;
-    const u = new URL(this.c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = `/orders/${id}`;
 
     const r = await c.delete(u);
@@ -219,7 +219,7 @@ class OrdersService {
 
   async cancelByClientId(id) {
     const c = this._client;
-    const u = new URL(this.c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = `/orders/by_client_id/${id}`;
 
     const r = await c.delete(u);
@@ -229,7 +229,7 @@ class OrdersService {
 
   async cancelOpenTriggerOrders(id) {
     const c = this._client;
-    const u = new URL(this.c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = `/conditional_orders/${id}`;
 
     const r = await c.delete(u);
@@ -239,7 +239,7 @@ class OrdersService {
 
   async cancelAllOrders() {
     const c = this._client;
-    const u = new URL(this.c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = `/orders}`;
 
     const r = await c.delete(u);
