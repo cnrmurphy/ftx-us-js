@@ -207,6 +207,16 @@ class OrdersService {
     return r.data.result;
   }
 
+  async getOrderStatusByClientId(id) {
+    const c = this._client;
+    const u = c.newBaseURL();
+    u.pathname = `/orders/by_client_id/${client_order_id}`;
+
+    const r = await c.get(u);
+
+    return r.data.result;
+  }
+
   async cancelById(id) {
     const c = this._client;
     const u = c.newBaseURL();
