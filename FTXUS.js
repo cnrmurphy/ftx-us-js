@@ -56,6 +56,10 @@ class FTXUS {
     this._client = client;
   }
 
+  newBaseURL() {
+    return new URL(this.baseURL.href);
+  }
+
   requestSignature(ts, method, url, payload='') {
     const signaturePayload = `${ts}${method}/api${url.pathname}${url.search}${payload}`;
     const signature = crypto.createHmac('sha256', this._secret)
