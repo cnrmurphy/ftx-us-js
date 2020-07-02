@@ -1,5 +1,3 @@
-const { URL } = require('url');
-
 const basePath = '/orders';
 
 // These can be useful when constructing certain payloads.
