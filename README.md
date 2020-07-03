@@ -92,6 +92,11 @@ await FTXUS.Markets.getTrades(marketName, optionalParameters);
 ```
 ### Orders
 [FTX.us Documentation](https://docs.ftx.us/#orders)
+### getOpenOrders()
+```JavaScript
+await FTXUS.Orders.getOpenOrders();
+```
+
 
 ## TODO
 Currently the client uses Axios.js to make HTTP requests.
