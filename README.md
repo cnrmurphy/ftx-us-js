@@ -96,7 +96,10 @@ await FTXUS.Markets.getTrades(marketName, optionalParameters);
 ```JavaScript
 await FTXUS.Orders.getOpenOrders();
 ```
-
+### canelAllOrders()
+```JavaScript
+await FTXUS.Orders.cancelAllOrders();
+```
 
 ## TODO
 Currently the client uses Axios.js to make HTTP requests.
