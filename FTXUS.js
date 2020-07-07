@@ -79,7 +79,7 @@ class FTXUS {
       this.client.defaults.headers.common[FTXUS_SUBACCOUNT] = this._subaccount;
     }
     if (this.clientCanAuthorize()) {
-      const ts = +Date.toString();
+      const ts = +Date;
       this._client.defaults.headers.common[FTXUS_KEY] = this._key;
       this._client.defaults.headers.common[FTXUS_TS] = ts;
       this._client.defaults.headers.common[FTXUS_SIGN] = this.requestSignature(ts, method, url, payload);
