@@ -29,7 +29,7 @@ class MarketsService {
     const c = this._client;
     const u = new URL(c.baseURL.href);
     u.pathname = `${basePath}/${marketName}/orderbook`;
-    u.searchParams.append(`depth=${depth}`);
+    u.searchParams.append('depth', depth);
 
     const r = await c.get(u);
     return r.data.result;
