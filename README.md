@@ -96,6 +96,13 @@ await FTXUS.Markets.getTrades(marketName, optionalParameters);
 ```JavaScript
 await FTXUS.Orders.getOpenOrders();
 ```
+### getHistory()
+```JavaScript
+const { currencyPairs } = require('ftx-us');
+const marketName = currencyPairs.BTC.USD;
+const opts = { startTime: 1559881511, endTime: 1559901511, limit: 100 }
+await FTXUS.Orders.getHistory(marketName, opts);
+```
 ### canelAllOrders()
 ```JavaScript
 await FTXUS.Orders.cancelAllOrders();
