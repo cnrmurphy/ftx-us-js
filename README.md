@@ -107,7 +107,11 @@ await FTXUS.Orders.getHistory(marketName, opts);
 ```JavaScript
 await FTXUS.Orders.cancelAllOrders();
 ```
-
+## Troubleshooting
+### Can't authorize
+If you cannot authorize, you should ensure that you're api key and secret is correct.
+You should also make sure that your computer clock is synced correctly. If you're computer
+clock is out of sync, the timestamp created for the signature header will be incorrect.
 ## TODO
 Currently the client uses Axios.js to make HTTP requests.
 I will be replacing this with the native Node.js HTTP client
