@@ -1,5 +1,3 @@
-const { URL } = require('url');
-
 const basePath = '/markets';
 
 class MarketsService {
@@ -9,7 +7,7 @@ class MarketsService {
 
   async list() {
     const c = this._client;
-    const u = new URL(c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = basePath;
 
     const r = await c.get(u);
@@ -18,7 +16,7 @@ class MarketsService {
 
   async get(marketName) {
     const c = this._client;
-    const u = new URL(c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = `${basePath}/${marketName}`;
 
     const r = await this._client.get(u);
@@ -27,7 +25,7 @@ class MarketsService {
 
   async getOrderBook(marketName, depth=20) {
     const c = this._client;
-    const u = new URL(c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = `${basePath}/${marketName}/orderbook`;
     u.searchParams.append('depth', depth);
 
@@ -38,7 +36,7 @@ class MarketsService {
   async getTrades(marketName, opts={ startTime: null, endTime: null, limit: 20 }) {
     const { startTime, endTime, limit } = opts;
     const c = this._client;
-    const u = new URL(c.baseURL.href);
+    const u = c.newBaseURL();
     u.pathname = `${basePath}/${marketName}/trades`;
     u.searchParams.append('limit', limit);
 
