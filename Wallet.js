@@ -69,6 +69,26 @@ class WalletService {
 
     return r.data.result;
   }
+
+    async requestWithdrawal(coin, size, address, opts={ tag: null, password: null, code: null }) {
+    const { tag, password, code } = opts;
+    const c = this._client;
+    const u = new URL(c.baseURL.href);
+    u.pathname = endpoints.WALLET.WITHDRAWALS;
+
+    const r = await c.post(u, {
+      coin,
+      size,
+      address,
+      tag,
+      password,
+      code
+    });
+
+    return r.data.result;
+  }
 }
+
+
 
 module.exports = WalletService;
