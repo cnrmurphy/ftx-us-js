@@ -11,6 +11,10 @@ and HTTP headers to the regular FTX values and it will work the same.
 At some pont there will be an option to simply point this client at either
 address.
 
+## FTX (12-20-22)
+Around the time when I made this (summer 2020), I would have never imagined that FTX would one day become insolvent and Sam Bankman-Fried
+would be arrested and charged with several counts of fraud. I honestly thought FTX was a legit business and trusted SBF. How wrong was I. Life comes at you fast!
+
 ## Installation
 ```
 npm i ftx-us
