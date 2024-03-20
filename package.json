@@ -4,7 +4,7 @@
   "description": "FTX US API client",
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.28.0",
     "ws": "^7.3.0"
   },
   "devDependencies": {},
